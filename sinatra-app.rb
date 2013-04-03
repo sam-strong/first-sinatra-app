@@ -18,6 +18,11 @@ get '/' do
   erb :index
 end
 
+get '/other' do 
+	@names = ["this","is","not","a","list","of","names","anymore"]
+	erb :index
+end
+
 # Try adding some other routes
 
 # Test at <appname>.heroku.com (you'll need to create your app first!)
