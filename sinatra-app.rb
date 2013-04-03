@@ -8,13 +8,13 @@ require 'sinatra/contrib'
 
 
 # for templates uncomment the line below
-# require 'erb'
+require 'erb'
 
 
 
 get '/' do
   # This will be your default route
-  'hello world'
+  erb :index
 end
 
 # Try adding some other routes
