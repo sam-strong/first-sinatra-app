@@ -20,8 +20,12 @@ end
 
 get '/other' do 
 	@names = ["this","is","not","a","list","of","names","anymore"]
-	erb :index
+	erb :name
 end
+
+post 'users' do 
+	@name = name
+	
 
 # Try adding some other routes
 
