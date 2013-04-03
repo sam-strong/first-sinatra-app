@@ -14,6 +14,7 @@ require 'erb'
 
 get '/' do
   # This will be your default route
+  @names = ["tom","dick","harry"]
   erb :index
 end
 

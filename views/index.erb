@@ -2,6 +2,15 @@
   <body>
 	<p>Here it is:</p>
     <p>
-    <strong> hello world </strong></p>
+      <strong> hello world </strong>
+    </p>
+    <ul>
+    	<li>this is a list</li>
+    	<li>this is also a list</li>
+    	<li>haha part 3 of the list</li>
+    </ul>
+    <% @names.each do |name| %>
+    <p><%=name%></p>
+    <%end%>
   </body>
 </html>
