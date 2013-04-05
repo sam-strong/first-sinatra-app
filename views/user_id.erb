@@ -1,0 +1,10 @@
+<div><ul>
+      <% @contacts.each do |contact| %>
+        <% if contact.id == @user_id.to_i %>
+          <p>name: <%= contact.name %></p>
+          <p>age: <%= contact.age %></p>
+          <p>sex: <%= contact.sex %></p>
+
+        <% end %>
+      <% end %>
+</div></ul>

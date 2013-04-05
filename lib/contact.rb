@@ -6,5 +6,5 @@ class Contact
   property :age, Integer
   property :sex, String
 
-  # has n, :comment
+  has n, :comment
 end

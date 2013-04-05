@@ -48,9 +48,11 @@ post '/users' do
 	contact.name = params["firstname"]
 	contact.age = params["age"]
 	contact.sex = params["sex"]
-
+#  contact.twitter = params["twitter"]
 	contact.save
-  redirect "/users"
+  @contact_id=contact.id
+  puts @contact_id
+  redirect "/users/#{@contact_id}"
 end
 
 get '/users' do
@@ -58,14 +60,22 @@ get '/users' do
   erb :users
 end
 
+get '/users/:id' do
+"hello"
+   @contacts = Contact.all
+   @user_id = params[:id]
+   puts params[:id]
+   erb :user_id
+end
+
 post '/comments' do
   comment = Comment.new
   comment.note = params["note"]
   comment.name = params["firstname"]
   comment.time = Time.now
-  comment.contact_id = params["contact_id"]
+  comment.contact_id = params[@contact_id]
   comment.save
-  redirect 'comments'
+  redirect '/comments'
 end
 
 get '/comments' do
