@@ -1,6 +1,6 @@
-<form action="/comments" method="post">
+
+<form action="/comment_form/<%= @user_id %>" method="post">
   <p> Add your comment to the Makers' website </p>
   <textarea name="note" cols="20" row="4"> Enter your comments </textarea>
-
   <input type="submit">
 </form>

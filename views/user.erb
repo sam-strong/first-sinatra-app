@@ -1,0 +1,16 @@
+
+<div><ul>
+      <% @contacts.each do |contact| %>
+        <% if contact.id == @user_id.to_i %>
+          <p>name: <%= contact.name %></p>
+          <p>age: <%= contact.age %></p>
+          <p>sex: <%= contact.sex %></p>
+
+        <% end %>
+      <% end %>
+</div></ul>
+
+<a href="/comment_form/<%= @user_id %>"><button type = "button">Add a comment</button></a>
+<p></p>
+<a href="/users/<%= @user_id %>"><button type = "button">View the list of Makers</button></a>
+<p></p>

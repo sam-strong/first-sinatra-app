@@ -1,8 +1,8 @@
 <div><ul>
       <% @comments.each do |comment| %>
         <p>comment: <%= comment.note %></p>
-        <!-- <p>name: <%= comment.name %></p> -->
-      <p>time: <%= comment.time %></p>
+        <p>name: <%= comment.name %></p>
+        <p>time: <%= comment.time %></p>
       <% end %>
-      <%= @comments.inspect %>
+
 </div></ul>

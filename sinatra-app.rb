@@ -17,66 +17,69 @@ DataMapper::Model.raise_on_save_failure = true
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
-
-get '/' do
-  # This will be your default route
-  @names = ["tom","dick","harry"]
-  erb :index
-  #haml :list, :locals => { :cs => Contacts.all}
+get '/'do
+	erb :welcome
 end
 
-get '/other' do
-	@names = ["this","is","not","a","list","of","names","anymore"]
-	erb :name
+get '/user_form' do
+  erb :user_form
 end
 
-get '/users_form'do
-	erb :partial
-end
-
-get '/comment_form'do
-  erb :comment_form
-end
-# get '/users' do
-# 	@name = contact.get
-#     erb :users
-# end
-
-post '/users' do
-	contact = Contact.new
-  puts params
-	contact.name = params["firstname"]
-	contact.age = params["age"]
-	contact.sex = params["sex"]
+post '/user_entered' do
+  contact = Contact.new
+  contact.name = params["firstname"]
+  contact.age = params["age"]
+  contact.sex = params["sex"]
 #  contact.twitter = params["twitter"]
-	contact.save
+  contact.save
   @contact_id=contact.id
-  puts @contact_id
-  redirect "/users/#{@contact_id}"
+  redirect "/user_entered/#{@contact_id}"
 end
 
-get '/users' do
+get '/user_entered/:id' do
+  @user_id = params[:id]
   @contacts = Contact.all
-  erb :users
+  erb :user
 end
 
 get '/users/:id' do
-"hello"
    @contacts = Contact.all
    @user_id = params[:id]
-   puts params[:id]
-   erb :user_id
+   erb :users
 end
 
-post '/comments' do
+get '/comment_form/:id' do
+  @user_id = params[:id]
+    erb :comment_form
+end
+
+post '/comment_form/:id'do
   comment = Comment.new
+  # comment.contact = params[:id]
   comment.note = params["note"]
-  comment.name = params["firstname"]
   comment.time = Time.now
-  comment.contact_id = params[@contact_id]
+  comment.contact = Contact.get(params[:id])
+  comment.name = Contact.get(params[:id]).name
   comment.save
   redirect '/comments'
 end
+
+
+
+
+
+
+
+
+# post '/comments' do
+#   comment = Comment.new
+#   comment.note = params["note"]
+#   comment.name = params["firstname"]
+#   comment.time = Time.now
+#   comment.contact_id = params[@contact_id]
+#   comment.save
+#   redirect '/comments'
+# end
 
 get '/comments' do
   @comments = Comment.all
