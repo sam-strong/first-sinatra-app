@@ -19,8 +19,8 @@
     <li>
       <p> <%= comment.note %></p>
       <p> <%= comment.time %></p>
-      <a href="/user_comment/edit?u=<%= @user_id %>&&c=<%= comment.id %>"><button type = "button">Edit a comment</button></a>
-      <a href="/user_comment/remove?u=<%= @user_id %>&&c=<%= comment.id %>"><button type = "button">Remove a  comment</button></a>
+      <a href="/users/<%= @user_id %>/comments/<%= comment.id %>?action=edit"><button type = "button">Edit a comment</button></a>
+      <a href="/users/<%= @user_id %>/comments/<%= comment.id %>?action=remove"><button type = "button">Remove a  comment</button></a>
     </li>
     <% end %>
   </ul>
@@ -33,7 +33,7 @@
       <a href="/comment_form/<%= @user_id %>"><button type = "button">Add a comment</button></a>
     </td>
     <td>
-      <a href="/users/<%= @user_id %>"><button type = "button">View the list of Makers</button></a>
+      <a href="/users?u=<%= @user_id %>"><button type = "button">View the list of Makers</button></a>
     </td>
   </tr>
 </table>

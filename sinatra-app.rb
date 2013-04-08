@@ -21,11 +21,11 @@ get '/'do
   erb :welcome
 end
 
-get '/user_form' do
+get '/users/new' do
   erb :user_form
 end
 
-post '/user_entered' do
+post '/users' do
   contact = Contact.new
   contact.name = params["firstname"]
   contact.age = params["age"]
@@ -33,19 +33,19 @@ post '/user_entered' do
   #  contact.twitter = params["twitter"]
   contact.save
   @contact_id=contact.id
-  redirect "/user_entered/#{@contact_id}"
+  redirect "/users/#{@contact_id}"
 end
 
-get '/user_entered/:id' do
+get '/users/:id' do
   @user_id = params[:id]
   @contact = Contact.get(params[:id])
   @comments = Contact.get(params[:id]).comment
   erb :user
 end
 
-get '/users/:id' do
+get '/users' do
   @contacts = Contact.all
-  @user_id = params[:id]
+  @user_id = params[:u]
   erb :users
 end
 
@@ -64,15 +64,17 @@ post '/comment_form/:id'do
   redirect '/comments'
 end
 
-get '/user_comment/edit' do
-  @user = params[:u]
-  @comment = params[:c]
+get '/users/:id/comments/:comment_id' do
+  @task = params[:action]
+  @user = params[:id]
+  @comment = params[:comment_id]
   erb :user_comment
 end
 
-get '/user_comment/remove' do
-  @user = params[:u]
-  @comment = params[:c]
+get '/users/:id/comments/:comment_id' do
+  @task = params[:action]
+  @user = params[:id]
+  @comment = params[:comment_id]
   erb :user_comment
 end
 
