@@ -1,16 +1,41 @@
 
 <div><ul>
-      <% @contacts.each do |contact| %>
-        <% if contact.id == @user_id.to_i %>
-          <p>name: <%= contact.name %></p>
-          <p>age: <%= contact.age %></p>
-          <p>sex: <%= contact.sex %></p>
+<table border = "1">
+  <tr>
+    <td>
+      <p>  Name: <%= @contact.name %>  </p>
+    </td>
+    <td>
+      <p>  Age: <%= @contact.age %>  </p>
+    </td>
+    <td>
+      <p>  Sex: <%= @contact.sex %>  </p>
+    </td>
+  </tr>
+</table>
+<table>
+  <tr><ul>
+    <% @comments.each do |comment| %>
+    <li>
+      <p> <%= comment.note %></p>
+      <p> <%= comment.time %></p>
+      <a href="/user_comment/edit?u=<%= @user_id %>&&c=<%= comment.id %>"><button type = "button">Edit a comment</button></a>
+      <a href="/user_comment/remove?u=<%= @user_id %>&&c=<%= comment.id %>"><button type = "button">Remove a  comment</button></a>
+    </li>
+    <% end %>
+  </ul>
+  </tr>
+ </table>
+ <table>
+  <tr>
 
-        <% end %>
-      <% end %>
+    <td>
+      <a href="/comment_form/<%= @user_id %>"><button type = "button">Add a comment</button></a>
+    </td>
+    <td>
+      <a href="/users/<%= @user_id %>"><button type = "button">View the list of Makers</button></a>
+    </td>
+  </tr>
+</table>
 </div></ul>
 
-<a href="/comment_form/<%= @user_id %>"><button type = "button">Add a comment</button></a>
-<p></p>
-<a href="/users/<%= @user_id %>"><button type = "button">View the list of Makers</button></a>
-<p></p>

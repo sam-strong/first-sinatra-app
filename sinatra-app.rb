@@ -18,7 +18,7 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 get '/'do
-	erb :welcome
+  erb :welcome
 end
 
 get '/user_form' do
@@ -30,7 +30,7 @@ post '/user_entered' do
   contact.name = params["firstname"]
   contact.age = params["age"]
   contact.sex = params["sex"]
-#  contact.twitter = params["twitter"]
+  #  contact.twitter = params["twitter"]
   contact.save
   @contact_id=contact.id
   redirect "/user_entered/#{@contact_id}"
@@ -38,24 +38,24 @@ end
 
 get '/user_entered/:id' do
   @user_id = params[:id]
-  @contacts = Contact.all
+  @contact = Contact.get(params[:id])
+  @comments = Contact.get(params[:id]).comment
   erb :user
 end
 
 get '/users/:id' do
-   @contacts = Contact.all
-   @user_id = params[:id]
-   erb :users
+  @contacts = Contact.all
+  @user_id = params[:id]
+  erb :users
 end
 
 get '/comment_form/:id' do
   @user_id = params[:id]
-    erb :comment_form
+  erb :comment_form
 end
 
 post '/comment_form/:id'do
   comment = Comment.new
-  # comment.contact = params[:id]
   comment.note = params["note"]
   comment.time = Time.now
   comment.contact = Contact.get(params[:id])
@@ -64,8 +64,17 @@ post '/comment_form/:id'do
   redirect '/comments'
 end
 
+get '/user_comment/edit' do
+  @user = params[:u]
+  @comment = params[:c]
+  erb :user_comment
+end
 
-
+get '/user_comment/remove' do
+  @user = params[:u]
+  @comment = params[:c]
+  erb :user_comment
+end
 
 
 
@@ -83,7 +92,6 @@ end
 
 get '/comments' do
   @comments = Comment.all
-  puts @comments.inspect
   erb :comments
 end
 
